@@ -151,12 +151,10 @@
     </div>
   </div>
 
-  <!-- Font Awesome pour les icônes (optionnel) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <script>
     (function() {
-      // Fonction pour mettre à jour le message de statut
       function setStatusMessage(message, isError = false) {
         const statusEl = document.getElementById('statusMessage');
         statusEl.textContent = message;
@@ -167,7 +165,6 @@
         }
       }
 
-      // Fonction pour afficher un compte à rebours
       function startCountdown(seconds, targetUrl) {
         const countdownEl = document.getElementById('redirectCountdown');
         let remaining = seconds;
@@ -182,7 +179,6 @@
         }, 1000);
       }
 
-      // Vérifier l'authentification
       const isAuthenticated = sessionStorage.getItem('cdg2026_authenticated') === 'true';
       const currentPage = window.location.pathname.split('/').pop() || 'index.html';
       
@@ -194,7 +190,6 @@
           setStatusMessage('Connexion détectée, redirection vers l\'interface...');
           startCountdown(2, 'index_notation.html');
           
-          // Rediriger vers l'interface principale
           setTimeout(() => {
             window.location.href = 'index_notation.html';
           }, 2000);
@@ -202,19 +197,16 @@
           setStatusMessage('Vous n\'êtes pas connecté, redirection vers la page de connexion...');
           startCountdown(2, 'login.html');
           
-          // Afficher le lien manuel après 2 secondes
           setTimeout(() => {
             document.getElementById('manualLink').style.display = 'inline-block';
           }, 2000);
           
-          // Rediriger vers la page de login
           setTimeout(() => {
             window.location.href = 'login.html';
           }, 2000);
         }
       }, 1000);
 
-      // Fallback: si la redirection automatique échoue après 5 secondes
       setTimeout(() => {
         const manualLink = document.getElementById('manualLink');
         if (manualLink.style.display === 'none') {
