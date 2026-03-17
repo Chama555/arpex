@@ -1178,27 +1178,10 @@ starsWidget.addEventListener('click', e => {
 document.getElementById('btn-save').addEventListener('click', saveCurrentTrack);
 document.getElementById('btn-next').addEventListener('click', goNext);
 document.getElementById('btn-prev').addEventListener('click', goPrev);
-document.getElementById('btn-download').addEventListener('click', downloadJSON);
-document.getElementById('file-upload').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const data = JSON.parse(ev.target.result);
-      if (!data.pistes || !Array.isArray(data.pistes)) throw new Error('Format invalide');
-      state.pistes = data.pistes.map(p => ({ ...p }));
-      applyFilters();
-      syncSimulationMaxPistes();
-      updateProgress();
-      initScoresChart(); 
-      showToast(`${data.pistes.length} pistes chargées ✓`, 'success');
-    } catch (err) {
-      showToast('Erreur : fichier JSON invalide', 'error');
-    }
-  };
-  reader.readAsText(file);
-  e.target.value = '';
+document.getElementById('btn-logout')?.addEventListener('click', () => {
+  sessionStorage.removeItem('cdg2026_authenticated');
+  sessionStorage.removeItem('cdg2026_user');
+  window.location.href = 'login.html';
 });
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
